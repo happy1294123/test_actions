@@ -1,0 +1,18 @@
+name: line message
+on:
+  workflow_run:
+    workflows: ['Push to Space']
+    branches: [main]
+    types:
+      - completed
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: send message
+        uses: louis70109/line-notify-action@master
+        with:
+          token: ${{ secrets.LINE_NOTIFY_TOKEN }}
+          message: "成功更新線上項目"
